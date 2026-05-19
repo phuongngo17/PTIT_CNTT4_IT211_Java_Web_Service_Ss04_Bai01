@@ -1,0 +1,15 @@
+Phần 1 – Phân tích logic:
+Giải thích tại sao client nhận về chuỗi [Movie@3a1b2c3d, ...] thay vì JSON.
+- [Movie@3a1b2c3d, Movie@4f2e1a0b]
+ thay vì JSON là do dòng code:
+ return movies.toString();
+
+Nguyên nhân gốc rễ nằm ở đâu trong đoạn code trên?
+- Sai ở thiết kế API:
+public String getMovies()
+và:
+return movies.toString();
+Trong Spring Boot, để trả về JSON đúng chuẩn:
+Không nên trả String
+Nên trả trực tiếp List<Movie>
+Spring Boot sẽ dùng thư viện Jackson để tự động chuyển object Java -> JSON.
